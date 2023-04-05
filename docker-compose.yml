@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  cartdb: 
+    image: redis:alpine
+  
+  #portainer:
+  #  image: portainer/portainer-ce
+
+
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+
+  orderdb:
+    image:  mcr.microsoft.com/mssql/server:2017-latest
+
+
+  publicutilities.api:
+    image: ${DOCKER_REGISTRY-}publicutilitiesapi
+    build:
+      context: .
+      dockerfile: PublicUtilities.API/Dockerfile
+
+  ordering:
+    image: ${DOCKER_REGISTRY-}ordering
+    build:
+      context: .
+      dockerfile: Ordering/Ordering/Dockerfile
+
